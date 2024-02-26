@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+/* VARIABLES */
+/* File unused. Please go to next.config.js to get it*/
+
+$color-background: #121212;
+$color-surface: #212121;
+$color-on-surface: #ededed;
+$color-primary: #e6b905;
+$color-signature: #8b0c03;
+$color-text: #e1e1e1;
+$color-text-secondary: #212121;
+
+$font-headline: "Share Tech Mono", monospace;
+$font-text: "Roboto", sans-serif;
+$font-signature: "Kaushan Script", cursive;
+
+$radius: 0.5rem;
+$card-transition: all 0.2s ease-in-out;
+$card-width: 16rem;
+
+$link: #ffa600;
+$listStyle: none;
+
+$wrapperL: 1450px;
+$wrapperM: 1225px;
+
+$wide-desktop-breakpoint: 1475px;
+$desktop-breakpoint: 1024px;
+$tablet-breakpoint: 768px;
+$phone-xl-breakpoint: 650px;
+$phone-l-breakpoint: 425px;
+$phone-m-breakpoint: 375px;
+$phone-s-breakpoint: 320px;
+
+@function bounding-width($width) {
+  @return $width + 1.5rem;
+}
+
+@function negative-width($width) {
+  @return $width * -1;
+}
+
+//PLACEHOLDERS
+%flex-container {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+%hamburger-absolute {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+// MIXINS
+@mixin min-size($size) {
+  min-width: $size;
+  min-height: $size;
+}
+
+@mixin max-size($size) {
+  max-width: $size;
+  max-height: $size;
+}
+
+%childWrapperL > * {
+  max-width: $wrapperL;
+  margin: auto;
+  padding: 0 1rem;
+}

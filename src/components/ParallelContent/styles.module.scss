@@ -1,0 +1,47 @@
+@import "../../css/variables.scss";
+//@import 'functions';
+
+%parallelContent {
+  @extend %flex-container;
+  max-width: $wrapperL;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  margin-bottom: 4rem !important;
+
+  h2 {
+    font-size: 1.25em;
+    font-family: $font-text;
+    color: $color-text;
+    font-weight: normal;
+    margin-top: 0;
+  }
+}
+
+.left {
+  @extend %parallelContent;
+  flex-direction: row;
+}
+
+.right {
+  @extend %parallelContent;
+  flex-direction: row-reverse;
+}
+
+.colText {
+}
+
+.colMedia {
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+  .left {
+    flex-direction: column-reverse;
+  }
+  .right {
+    flex-direction: column-reverse;
+  }
+}
