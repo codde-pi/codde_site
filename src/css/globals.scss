@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "variables.module.scss";
 @import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Roboto&display=swap");
 
 /* VARIABLES */
@@ -102,6 +102,7 @@ h1,
 h2,
 h3 {
   color: $color-primary;
+  padding-bottom: 2rem;
 }
 
 h1 {

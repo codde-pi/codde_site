@@ -58,7 +58,7 @@ const config = {
             require.resolve("./src/css/custom.css"),
             require.resolve("./src/css/globals.scss"),
             require.resolve("./src/css/layouts.scss"),
-            require.resolve("./src/css/variables.scss"),
+            require.resolve("./src/css/variables.module.scss"),
           ],
         },
       }),

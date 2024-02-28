@@ -1,0 +1,83 @@
+@import "../../css/variables.module.scss";
+.graph {
+  max-width: wrapperM;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.loading {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 1rem;
+
+  > :first-child {
+  }
+
+  > :last-child > * {
+    position: relative;
+    margin-top: -20px; // same level as the first particle
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  > div {
+    height: 20px;// particle size
+  }
+
+}
+.squareLoading {
+  position: absolute;
+  height: 20px; // particle size
+  width: 20px; // particle size
+  background-color: $color-primary;
+}
+
+/* .loading .squareLoading {
+  animation: loadingG 1.5s cubic-bezier(0.17, 0.37, 0.43, 0.67) infinite; // TODO: ease-in-out
+} */
+
+/* @keyframes loadingG {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(1500px, 0) rotate(360deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+} */
+
+.slidingList {
+  overflow: hidden;
+  height: 100px;
+  // display:block;
+  > div {
+    width: 150px;
+    background-color: $color-background;
+  }
+
+}
+
+.slidingItem {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // vertical-align: center;
+  box-sizing: border-box;
+  // border: 1px solid black;
+
+
+  p {
+    flex: 1;
+    text-align: center;
+  }
+  svg {
+    flex: 3;
+    max-width: 40%;
+    margin: auto;
+  }
+}

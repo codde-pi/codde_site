@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "variables.module.scss";
 
 /* LAYOUTS */
 
@@ -65,7 +65,7 @@
   }
 }
 
-@media screen and (max-width: 1110px) {
+@media screen and (max-width: 996px) {// Docusaurus threshold
   #intro {
     flex-direction: column-reverse;
 

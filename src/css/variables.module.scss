@@ -34,6 +34,11 @@ $phone-l-breakpoint: 425px;
 $phone-m-breakpoint: 375px;
 $phone-s-breakpoint: 320px;
 
+:export {
+  colorText: $color-text;
+  colorPrimary: $color-primary;
+}
+
 @function bounding-width($width) {
   @return $width + 1.5rem;
 }
