@@ -1,14 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import MultiComGraph from "@site/src/components/MultiComGraph";
 import ParallelContent from "@site/src/components/ParallelContent";
 import BannerHome from "@site/src/components/BannerHome";
 
 import styles from "./index.module.css";
 import layouts from "@site/src/css/layouts.scss";
+import { Canvas } from "@react-three/fiber";
+import { Model } from "../components/ThreeModels/Jerry_robot";
+import { OrbitControls } from "@react-three/drei";
+import ModelViewer from "../components/ThreeModels/ModelViewer";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -49,44 +54,11 @@ export default function Home() {
   return (
     <Layout title="Home" description="home">
       <>
-        <BannerHome />
+        {/*<BannerHome />*/}
         {/*<Banner/>*/}
+        <ModelViewer scale="1" modelPath={"/models/jerry_robot-web.glb"} />
         <main className={styles.main} style={{ marginTop: "120px" }}>
-          <ParallelContent
-            side={"left"}
-            alt={"dopy app phone demo"}
-            src={"/videos/dopy_phone_demo_000.webm"}
-            media_height={810}
-            media_width={600}
-          >
-            <h3>Libère le potentiel de ton mobile</h3>
-
-            <p>
-              Plus besoin de faire souffler les ventilos de ta machine de
-              guerre, tout ce dont tu as besoin est dans le creux de ta main.{" "}
-            </p>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <p>
-              Connecte-toi en SSH, SFTP et affiche toutes les stats de ta
-              machine à travers une interface graphique simple.{" "}
-            </p>
-          </ParallelContent>
-          <ParallelContent
-            side={"right"}
-            alt={"dopy app wide screen demo"}
-            src={"/videos/dopy_tablet_demo_000_v2.webm"}
-            media_width={700}
-            media_height={600}
-          >
-            <h3>Vois les choses en grand</h3>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <p>Et si ta tablette pouvait enfin te servir à quelque chose ? </p>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            Retrouve toutes les options de ton mobile sur grand écran, et
-            profite à 100% de fonctionnalités telles que l&apos;environnement de
-            bureau virtuel (VNC), la documentation interactive et le tableau de
-            bord.
-          </ParallelContent>
+          <MultiComGraph />
         </main>
         {/*
       <ImportantInfo>
