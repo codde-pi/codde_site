@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import styles from "./multi-com-graph.module.scss";
 // import SlidingList from "@site/src/components/SlidingList";
 import PhoneIcon from "@site/static/img/icon_phone.svg";
@@ -44,7 +45,7 @@ export default function MultiComGraph() {
 
   return (
     <section className="wrapperL">
-      <h2>Same Code. Different platforms</h2>
+      <h2>Same Code. Different platforms.</h2>
       <div className={styles.graph} ref={graphRef}>
         <div
           className={styles.loading}
@@ -58,7 +59,7 @@ export default function MultiComGraph() {
           <SquareLoading length={width} coeff={-1} numParticles={3} />
         </div>
         <SlidingList titles={clientsName} items={clients} />
-        <SlidingList titles={protocols} />
+        <SlidingList titles={protocols} blowId={styles.graphBlow} />
         <SlidingList titles={targetDevices} />
       </div>
     </section>
@@ -87,35 +88,50 @@ export function SquareLoading({ length, coeff, numParticles }) {
           style={{
             transition: "transform 1s ease-in-out",
             transitionDelay: `${0.1 * i}s`,
-            transform: `translateX(${
-              (coeff ? coeff * direction : direction) * (length / 2)
-            }px)`, // rotate(${direction * 360}deg)
+            transform: `translateX(${(coeff ? coeff * direction : direction) * (length / 2)
+              }px)`, // rotate(${direction * 360}deg)
           }}
         />
-      </>
+      </>,
     );
   }
   return <div style={{ width: length }}>{particles}</div>;
 }
-export function SlidingList({ titles, items, delay }) {
+export function SlidingList({ titles, items, delay, blowId }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const boxRef = [useRef(), useRef(), useRef(), useRef()];
+  const [toggleAnim, setToggleAnim] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Increment the current index, and loop back to the beginning if reaching the end
       setCurrentIndex((prevIndex) =>
-        Math.floor(Math.random() * (titles.length - 0))
+        Math.floor(Math.random() * (titles.length - 0)),
       );
+      if (blowId != null) {
+        // boxRef.current.animationPlayState = toggleAnim ? "running" : "paused";
+        /* element.current.on("animationEnd", function () {
+            element.current.style.animationPlayState = "paused";
+          }); */
+        setToggleAnim((prevAnim) => (prevAnim ? 0 : 1));
+        //
+        /* boxRef.current.classList.add(styles.sonar);
+        void boxRef.current.offsetWidth;
+        boxRef.current.classList.remove(styles.sonar); */
+      }
     }, 3000);
 
     return () => {
       clearInterval(intervalId); // Cleanup the interval on component unmount
     };
   }, [titles.length]);
-
   return (
-    <div className={styles.slidingList}>
+    <div
+      className={classNames(styles.slidingList, toggleAnim ? styles.sonar : "")}
+      id={blowId ?? ""}
+    >
       <div
+        className={styles.slideTransformer}
         style={{
           transition: "transform 0.5s ease-out",
           transform: `translateY(-${currentIndex * (100 / titles.length)}%)`, // Assuming each div takes 100% width
