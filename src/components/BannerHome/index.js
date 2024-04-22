@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./banner-home.module.scss";
-import ParallelContent from "@site/src/components/ParallelContent";
 // import $ from "jquery";
 import useWindowDimensions from "@site/src/hooks/WindowDimensions";
 

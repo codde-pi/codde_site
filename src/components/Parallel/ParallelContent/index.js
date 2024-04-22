@@ -1,6 +1,6 @@
 import React from "react";
 import Showroom from "@site/src/components/Showroom";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 
 export default function ParallelContent({
   children,

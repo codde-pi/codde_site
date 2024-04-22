@@ -5,7 +5,8 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import MultiComGraph from "@site/src/components/MultiComGraph";
-import ParallelContent from "@site/src/components/ParallelContent";
+import ParallelContent from "@site/src/components/Parallel/ParallelContent";
+import ParallelModels from "@site/src/components/Parallel/ParallelModels";
 import BannerHome from "@site/src/components/BannerHome";
 
 import styles from "./index.module.css";
@@ -14,6 +15,9 @@ import { Canvas } from "@react-three/fiber";
 import { Model } from "../components/ThreeModels/Jerry_robot";
 import { OrbitControls } from "@react-three/drei";
 import ModelViewer from "../components/ThreeModels/ModelViewer";
+import Phone from "../components/ThreeModels/Phone";
+import GltfModel from "../components/ThreeModels/GltfModel";
+import Jerry from "../components/ThreeModels/Jerry";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -56,8 +60,29 @@ export default function Home() {
       <>
         {/*<BannerHome />*/}
         {/*<Banner/>*/}
-        <ModelViewer scale="1" modelPath={"/models/jerry_robot-web.glb"} />
         <main className={styles.main} style={{ marginTop: "120px" }}>
+          <ParallelModels side={'left'} media_height={600} media_width={600}>
+            {/* <GltfModel src={"/models/jerry_robot-web.glb"} scale={1} position={[0, 0, 0]} /> */}
+            <Jerry position={[0, 0, 0]} />
+            <div>
+              <h3>This is Jerry.</h3>
+
+              <p>A robot made with <span style={{ color: 'red' }}>❤️</span> by our team, like a thousands of others made by you.</p>
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              <p>But once you've built this amazing machine, how to interact with him, communicate remotely, monitor useful constants and observe what he's recording?</p>
+            </div>
+          </ParallelModels>
+          <ParallelModels side={'right'} media_height={600} media_width={600} position={[2, 0, 1]}>
+            <Phone screenImage={"/img/screenshot_1.png"} />
+            <div>
+              <h3>Unleash the potential of your smartphone</h3>
+
+              <p>No more need to blow the fans of your war machine,
+                everything you need is in the palm of your hand!</p>
+              <p>CODDE Pi is able to program and control your robot seemlessly, providing you a complete mobile IDE and customizable control interfaces.</p>
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+            </div>
+          </ParallelModels>
           <MultiComGraph />
         </main>
         {/*
