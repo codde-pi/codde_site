@@ -23,10 +23,10 @@
   min-height: 100vh;
   margin: auto;
 
-  h2 {
+  p {
     font-size: 1.25em;
     //font-family: $font-text;
-    color: $color-text;
+    // color: $color-text;
     font-weight: normal;
     margin-top: 0;
   }
@@ -41,7 +41,7 @@
 }
 
 .pseudoHeader {
-  height: 130vh;
+  height: 120vh;
   width: 100%;
   //background-color: yellow;
 }
@@ -174,4 +174,20 @@
     flex-direction: column-reverse;
     gap: 0;
   }
+}
+
+.gelatine {
+  animation: gelatine 0.3s infinite; // not infinite
+}
+@keyframes gelatine {
+  from, to { transform: scale(1, 1); }
+  25% { transform: scale(0.9, 1.1); }
+  50% { transform: scale(1.1, 0.9); }
+  75% { transform: scale(0.95, 1.05); }
+}
+
+.progressBar {
+  span {
+  color: $color-primary;
+}
 }

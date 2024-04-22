@@ -1,5 +1,7 @@
 @import "variables.module.scss";
 @import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Roboto&display=swap");
+// style.scss
+@import "../../node_modules/nes.css/css/nes.css";
 
 /* VARIABLES */
 
@@ -71,15 +73,16 @@ $phone-s-breakpoint: 320px;
 }
 
 html {
-  font-size: 16px;
+  font-size: 12px;
   scroll-behavior: smooth;
+  background-color: $color-background;
 
   @media screen and (min-width: 900px) {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   @media screen and (min-width: 1200px) {
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 
@@ -154,15 +157,33 @@ p > a {
   color: $color-primary;
   font-weight: bold;
 }
+%rounded-corner-defaults {
+  border-style: solid;
+  border-width: $border-size;
+}
+
 
 button {
-  font-size: 1em;
-  padding: 1em 2em;
-  margin: 1em auto;
+  // font-size: 1em;
+  // padding: 1em 2em;
+  // margin: 1em auto;
   background: $color-primary;
   color: $color-background;
-  border: none;
-  border-radius: $radius;
+  @include compact-rounded-corners(false);
+  position: relative;
+  display: inline-block;
+  padding: 6px 8px;
+  margin: $border-size;
+  text-align: center;
+  vertical-align: middle;
+  // cursor: $cursor-click-url, pointer;
+  user-select: none;
+@include btn-style(
+    $color-background,
+    $color-primary,
+    darken($color-primary, 15),
+    $shadow
+  );
 }
 
 menu > * {
@@ -228,4 +249,14 @@ th[scope="col"]:nth-child(1) {
 
 table {
   border-collapse: collapse;
+}
+
+main {
+  section {
+  max-width: $wrapperL;
+  margin: auto;
+  padding: 0 1rem;
+  margin-bottom: 4rem !important;
+
+  }
 }

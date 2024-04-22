@@ -18,6 +18,10 @@ import ModelViewer from "../components/ThreeModels/ModelViewer";
 import Phone from "../components/ThreeModels/Phone";
 import GltfModel from "../components/ThreeModels/GltfModel";
 import Jerry from "../components/ThreeModels/Jerry";
+import ParallelPhone from "../components/Parallel/ParallelPhone";
+import CommunityNetwork from "../components/CommunityNetwork";
+import Store from "../components/Store";
+import CodeExample from "../components/CodeExample";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -58,32 +62,23 @@ export default function Home() {
   return (
     <Layout title="Home" description="home">
       <>
-        {/*<BannerHome />*/}
-        {/*<Banner/>*/}
+        <BannerHome />
         <main className={styles.main} style={{ marginTop: "120px" }}>
-          <ParallelModels side={'left'} media_height={600} media_width={600}>
-            {/* <GltfModel src={"/models/jerry_robot-web.glb"} scale={1} position={[0, 0, 0]} /> */}
+          <ParallelModels side={'left'} media_height={600} media_width={600} position={[10, 5, 5]}>
             <Jerry position={[0, 0, 0]} />
             <div>
-              <h3>This is Jerry.</h3>
+              <h2>This is Jerry.</h2>
 
               <p>A robot made with <span style={{ color: 'red' }}>❤️</span> by our team, like a thousands of others made by you.</p>
               {/* eslint-disable-next-line react/no-unescaped-entities */}
               <p>But once you've built this amazing machine, how to interact with him, communicate remotely, monitor useful constants and observe what he's recording?</p>
             </div>
           </ParallelModels>
-          <ParallelModels side={'right'} media_height={600} media_width={600} position={[2, 0, 1]}>
-            <Phone screenImage={"/img/screenshot_1.png"} />
-            <div>
-              <h3>Unleash the potential of your smartphone</h3>
-
-              <p>No more need to blow the fans of your war machine,
-                everything you need is in the palm of your hand!</p>
-              <p>CODDE Pi is able to program and control your robot seemlessly, providing you a complete mobile IDE and customizable control interfaces.</p>
-              {/* eslint-disable-next-line react/no-unescaped-entities */}
-            </div>
-          </ParallelModels>
+          <ParallelPhone />
           <MultiComGraph />
+          <CommunityNetwork />
+          <Store />
+          <CodeExample language={"python"} />
         </main>
         {/*
       <ImportantInfo>
@@ -108,37 +103,6 @@ export default function Home() {
         </div>
       </ImportantInfo>
       */}
-        <section id={"stores"} className="childWrapperL">
-          <h3 className={styles.storesTitle}>Retrouve CODDE Pi sur le store</h3>
-          <div className={styles.stores}>
-            {/*<Store */}
-            {/*title="Google LLC, Public domain, attraverso Wikimedia Commons" */}
-            {/*href="https://commons.wikimedia.org/wiki/File:Google_Play_Arrow_logo.svg" */}
-            {/*src={'https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg'}>*/}
-            {/*    /!*<strong>Google PLay Store</strong><br/> (Décembre 2021)*!/*/}
-            {/*</Store>*/}
-            <a href="https://play.google.com/store/apps/details?id=com.wdm.dopy&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1">
-              <img
-                /*width={150} height={150}*/
-                height={150}
-                width={387}
-                alt="Disponible sur Google Play"
-                src="https://play.google.com/intl/en_us/badges/static/images/badges/fr_badge_web_generic.png"
-              />
-            </a>
-            {/*<Store
-                        title="Font Awesome Free 5.4.1 by @fontawesome - https://fontawesome.com, CC BY 4.0 <https://creativecommons.org/licenses/by/4.0>, via Wikimedia Commons"
-                        href="https://commons.wikimedia.org/wiki/File:Font_Awesome_5_brands_app-store-ios.svg"
-                        src={'https://upload.wikimedia.org/wikipedia/commons/2/26/Font_Awesome_5_brands_app-store-ios.svg'}
-                        invert>
-                        <strong>App Store</strong><br/> (Janvier 2021)
-                    </Store>*/}
-            <div className={styles.stores}>
-              <p>App Store (soon)</p>
-            </div>
-          </div>
-          {/*<p className={styles.storeDateDispo}>Disponible en Décembre 2021</p>*/}
-        </section>
       </>
     </Layout>
   );

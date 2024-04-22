@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./banner-home.module.scss";
 // import $ from "jquery";
 import useWindowDimensions from "@site/src/hooks/WindowDimensions";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 let nbRows = 0;
-let derniere_position_de_scroll_connue = 0;
 let oldPosition = 0;
-let ticking = false;
 
-let height = 0;
-let step = 0;
 
 function plusDemi(nb) {
   let factor = screen.height > screen.width ? 1.4 : 1;
@@ -26,6 +23,7 @@ function probability(level) {
   return bool;
 }
 
+// Probability to highlight pixel in YELLOW
 function probaHighlight() {
   let bool;
   const min = 0;
@@ -41,26 +39,45 @@ function randomId() {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export default class BannerHome extends React.Component {
-  intervalID = 0;
+const getPixelKey = (row, col) => {
+  return col + (row * (col + row));
+}
 
-  constructor(props) {
-    super(props);
-    this._isMounted = false;
-
-    this.state = {
-      pixelOpacity: 0,
-      pixelDisplay: "none",
-      headerDisplay: "block",
-      pixelArrays: [],
-    };
-
-    this.pixelSize = 30;
-    this.pixelHighlight = { background: "#e6b905" }; // color primary
-    this.pixelOn = { background: "#212121" }; // color surface
-    this.pixelOff = { background: "transparent" };
-    // this.windowDimensions = useWindowDimensions()
+const getProgressBar = (counter, total) => {
+  let progressCount = Math.floor((counter / total) * 50)
+  let progress = [];
+  let rest = [];
+  for (let i = 0; i < progressCount; i++) {
+    progress.push("█");
   }
+  for (let i = 0; i < (50 - progressCount); i++) {
+    rest.push("▒");
+  }
+  return <><span>{progress.join("")}</span>{rest.join("")}</>;
+}
+
+export default function BannerHome() {
+  let ticking = false;
+  let current_pos = 0;
+  let step = 0;
+  let intervalID = 0;
+  const { siteConfig } = useDocusaurusContext();
+
+  const { height, width } = useWindowDimensions();
+  var _isMounted = false;
+
+  const [pixelDisplay, setPixelDisplay] = useState('block');
+  const [pixelOpacity, setPixelOpacity] = useState(0);
+  const [headerDisplay, setHeaderDisplay] = useState('block');
+  const [pixelArrays, setPixelArrays] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const [progressBar, setProgressBar] = useState("");
+
+  const pixelSize = 30;
+  const pixelHighlight = { background: "#e6b905" }; // color primary
+  const pixelOn = { background: "#212121" }; // color surface
+  const pixelOff = { background: "transparent" };
+  // const windowDimensions = useWindowDimensions()
 
   // const [pixelRef, setPixelRef] = React.useState('0');
   // const [headerRef, setHeaderRef] = React.useState('block');
@@ -68,60 +85,60 @@ export default class BannerHome extends React.Component {
   // const [pixelHtml, setPixelHtml] = React.useState(Array());
   // const [pixelRefs, setPixelRefs] = React.useState(Array());
 
-  hidePixels = () => {
+  const hidePixels = () => {
     const array = [];
-    this.state.pixelArrays.forEach((item1, index1) => {
+    pixelArrays.forEach((item1, index1) => {
       array[index1] = item1;
       item1.forEach((item2, index2) => {
         array[index1][index2] = (
           <div
-            key={"pixel_" + index1 + "_" + index2 + "_" + randomId()}
-            style={this.pixelOff}
+            key={"pixel_" + index1 + "_" + getPixelKey(index1, index2)}
+            style={pixelOff}
           />
         );
       });
     });
-    this._isMounted &&
-      this.setState({ pixelArrays: array.map((item) => item) });
+    _isMounted &&
+      setPixelArrays(array.map((item) => item));
   };
 
-  fade = (sens, hide_pixels) => {
+  const fade = (sens, hide_pixels) => {
     //console.log('fade OUT')
     if (
-      (sens === "in" && this.state.pixelOpacity === "0") ||
-      (sens === "out" && this.state.pixelOpacity === "1")
+      (sens === "in" && pixelOpacity === 0) ||
+      (sens === "out" && pixelOpacity === 1)
     ) {
       /*let opacity = sens === 'in' ? 0 : 1;
             const intervalID = setInterval(() => {
-
+   
                 if (sens === 'in' && opacity < 1) {
                     opacity = opacity + 0.1;
-                    this._isMounted && this.setState({pixelOpacity: opacity});
+                    const _isMounted && this.setState({pixelOpacity: opacity});
                 } else if (sens === 'out' && opacity > 0) {
                     opacity = opacity - 0.1;
-                    this._isMounted && this.setState({pixelOpacity: opacity});
+                    const _isMounted && this.setState({pixelOpacity: opacity});
                 } else {
                     //console.log('fade OUT clear interval')
                     clearInterval(intervalID);
-                    /!*'in' ? this.setState({pixelDisplay: 'block'}) : *!/this.setState({pixelDisplay: 'none'})
-                    if (hide_pixels) this.hidePixels();
+                    /!*'in' ? const setState({pixelDisplay: 'block'}) : *!/this.setState({pixelDisplay: 'none'})
+                    if (hide_pixels) const hidePixels();
                 }
             }, 20);*/
       let opacity = sens === "in" ? 1 : 0;
-      this.setState({ pixelOpacity: opacity });
-      this.sleep(500).then((r) => {
-        this.setState({ pixelDisplay: "none" }); //todo: inverser si 'in'
-        if (hide_pixels) this.hidePixels();
+      setPixelOpacity(opacity);
+      sleep(500).then((r) => {
+        setPixelDisplay("none"); //todo: inverser si 'in'
+        if (hide_pixels) hidePixels();
       });
     }
   };
 
-  sleep = (milliseconds) => {
+  const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
-  updatePixels = (nb_rows, nb_colored_rows, step, direction) => {
-    const array = this.state.pixelArrays;
+  const updatePixels = (nb_colored_rows, direction) => {
+    const array = pixelArrays;
     for (let i = 0; i < nb_colored_rows; i++) {
       //for each pixel of the concerned row
       // array[nbRows - i] = []
@@ -129,116 +146,122 @@ export default class BannerHome extends React.Component {
       //console.log('iterator', iterator)
       if (iterator >= 0 && iterator < nbRows) {
         array[iterator].forEach((pixel, index) => {
-          // //console.log(currentValue + ', ' + currentIndex + ', ' + this);
-          let proba = step * (nb_colored_rows - i);
+          // //console.log(currentValue + ', ' + currentIndex + ', ' + const ;
+          let proba = step * (nb_colored_rows);
           //if (derniere_position_de_scroll_connue % nbRows == 0) //console.log('proba', proba);
           if (probability(proba)) {
             array[iterator][index] = (
               <div
-                key={"pixel_" + i + "_" + index + "_" + randomId()}
-                style={probaHighlight() ? this.pixelHighlight : this.pixelOn}
+                key={"pixel_" + iterator + "_" + index + "_" + getPixelKey(iterator, index)}
+                style={probaHighlight() ? pixelHighlight : pixelOn}
               />
             );
           }
         });
       }
     }
-    this._isMounted && this.setState({ pixelArrays: array });
+    setPixelArrays(array);
+    console.log('pixel udpated')
   };
-
-  scrollListener = () => {
+  // Declare a static listener.
+  const eventListeners = useRef();
+  const scrollHandler = useCallback(() => {
     // ...
-    derniere_position_de_scroll_connue = window.scrollY;
+    current_pos = window.scrollY;
     let nb_colored_rows = 0;
+    // setCounterAnim(false);
+    // console.log('scroll event')
 
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        if (derniere_position_de_scroll_connue === 0) {
+        if (current_pos === 0) {
           // TOP
-          this.fade("out", true);
+          fade("out", true);
           // asyncHidePixels();
           //header visible
-          this.setState({ headerDisplay: "block" });
-        } else if (oldPosition > derniere_position_de_scroll_connue) {
+          setHeaderDisplay("block");
+        } else if (oldPosition > current_pos) {
           //SCROLL UP from custom scroll height
           //this.hidePixels();
-          if (derniere_position_de_scroll_connue <= plusDemi(height)) {
-            this.setState({ pixelOpacity: "1", pixelDisplay: "block" });
-            // //console.log('on est dans la place');
-            // if (derniere_position_de_scroll_connue % this.pixelSize == 0) {
+          if (current_pos <= plusDemi(height)) {
+            setPixelOpacity(1)
+            setPixelDisplay("block");
+            console.log('on est dans la place');
+            // if (derniere_position_de_scroll_connue % const pixelSize == 0) {
 
             nb_colored_rows =
               plusDemi(nbRows) -
-              Math.ceil(derniere_position_de_scroll_connue / this.pixelSize);
+              Math.ceil(current_pos / pixelSize);
             //console.log('nb colored rows => ', nb_colored_rows);
             //for each colored row
-            this.updatePixels(nbRows, nb_colored_rows, step, "up");
+            setProgressBar(getProgressBar(nb_colored_rows, nbRows));
+            setCounter(Math.floor(nbRows / nb_colored_rows * 100));
+            updatePixels(nb_colored_rows, "up");
           }
-        } else if (oldPosition < derniere_position_de_scroll_connue) {
+        } else if (oldPosition < current_pos) {
           // SCROLL DOWN
 
-          if (derniere_position_de_scroll_connue < plusDemi(height)) {
+          if (current_pos < plusDemi(height)) {
             //this.hidePixels();
-            this.setState({ pixelOpacity: "1", pixelDisplay: "block" });
+            setPixelOpacity(1);
+            setPixelDisplay("block");
 
             nb_colored_rows = Math.ceil(
-              derniere_position_de_scroll_connue / this.pixelSize
+              current_pos / pixelSize
             );
-            //console.log('nb colored rows => ', nb_colored_rows);
+            console.log('nb colored rows => ', nb_colored_rows);
             //for each colored row
-            this.updatePixels(nbRows, nb_colored_rows, step, "down");
+            // FIXME: doesn't update pixel arrays without this next line
+            setProgressBar(getProgressBar(nb_colored_rows, nbRows));
+            setCounter(Math.floor(nb_colored_rows / nbRows * 100));
+            updatePixels(nb_colored_rows, "down");
           } else {
-            this.fade("out", true);
+            fade("out", true);
             //hidePixels();
             //asyncHidePixels();
-            this.setState({ headerDisplay: "none" });
+            setHeaderDisplay("none");
             //todo: enlever attribut color de tous les pixels
           }
         }
         // }
-        oldPosition = derniere_position_de_scroll_connue;
+        oldPosition = current_pos;
 
         ticking = false;
       });
     }
 
     ticking = true;
-  };
+  });
 
-  scrollToMain = () => {
+  const scrollToMain = () => {
     ////console.log('scroll !')
     //window.scrollTo(0, plusDemi(height))
     //$("html, body").animate({scrollTop: plusDemi(height) + 140});
-    let pos = derniere_position_de_scroll_connue;
+    let pos = current_pos;
     const plusDemiHeight = plusDemi(height) + 120;
-    this.intervalID = setInterval(() => {
+    const intervalID = setInterval(() => {
       if (pos <= plusDemiHeight) {
         pos = pos + 150;
-        this._isMounted && window.scrollTo(0, pos);
+        _isMounted && window.scrollTo(0, pos);
         //console.log('pos', pos)
       } else {
         //console.log('progressive SCROLL clear interval')
-        clearInterval(this.intervalID);
+        clearInterval(intervalID);
       }
     }, 50);
   };
 
-  isDesktop = () => {
+  const isDesktop = () => {
     return window.innerWidth > 1023;
   };
 
-  componentDidMount() {
-    this._isMounted = true;
-
-    // get sreen height
-    // const { height, width } = useWindowDimensions();
-    height = screen.height; //document.body.clientHeight //window.innerHeight
-    const width = screen.width; //document.body.clientWidth //window.innerWidth
+  useEffect(() => {
+    _isMounted = true;
     //console.log('width & height => ', width, height);
 
     // declare table size
-    nbRows = Math.ceil(height / this.pixelSize);
-    const nbColumns = Math.ceil(width / this.pixelSize);
+    nbRows = Math.ceil(height / pixelSize);
+    const nbColumns = Math.ceil(width / pixelSize);
     //console.log('rows & columns => ', nbRows, nbColumns);
 
     step = 100 / nbRows;
@@ -250,106 +273,103 @@ export default class BannerHome extends React.Component {
       for (let j = 0; j < nbColumns; j++) {
         arrayPixel[i][j] = (
           <div
-            key={"pixel_" + i + "_" + j + "_" + randomId()}
-            style={this.pixelOff}
+            key={"pixel_" + i + "_" + j + "_" + getPixelKey(i, j)}
+            style={pixelOff}
           />
         );
       }
     }
     // console.table(pixelHtml)
-    this._isMounted && this.setState({ pixelArrays: arrayPixel });
-    //console.log('use Effect running')
+    setPixelArrays(arrayPixel);
+    // console.log('use Effect running')
+  }, []);
 
-    document.addEventListener("scroll", this.scrollListener);
-  }
+  useEffect(() => {
 
-  componentWillUnmount() {
-    this._isMounted = false;
+    // document.addEventListener("scroll", scrollHandler);
+    window.removeEventListener('scroll', eventListeners.current, true);
+
+    // Then will set our current scroll handler to our static listener
+    eventListeners.current = scrollHandler;
+
+    // Here will be adding the static listener so we can keep the reference
+    // and remove it later on
+    window.addEventListener('scroll', eventListeners.current, true);
+
+  }, [scrollHandler])
+
+  /* componentWillUnmount() {
+    const _isMounted = false;
     clearInterval(this.intervalID);
-    document.removeEventListener("scroll", this.scrollListener);
-  }
+    document.removeEventListener("scroll", const scrollListener);
+  } */
 
-  render() {
-    return (
-      <>
-        <div
-          id={"sub-header"}
-          className={styles.header}
-          style={{ display: this.state.headerDisplay }}
-        >
-          {
-            <section className={styles.banner}>
-              <div className={styles.colMedia}>
-                <div className={styles.colText}>
-                  <h1 className={styles.title}>C.O.D.D.E. Pi®</h1>
-                  {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  <h2>
-                    L'appli mobile tout-en-un dans le contrôle de ton ordi à
-                    carte unique
-                  </h2>
-                  <div className={styles.button}>
-                    <button onClick={this.scrollToMain}>Découvrir</button>
-                  </div>
-                </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className={styles.media}
-                  priority
-                  /*{'https://cdn.dribbble.com/users/9543282/screenshots/16960929/media/b8756407a2bd598e539acc77edbff185.png'}*/
-                  src={"/img/codde_pi_introduction_4_3.webp"}
-                  title={
-                    "CODDE Pi's Robot is writing script, &lt;https://creativecommons.org/licenses/by-nc-nd/4.0/&gt; Creative Commons Mathis Lecomte"
-                  }
-                  alt={"coddepi's robot is writing python script"}
-                  width={800}
-                  height={600}
-                  objectFit={"contain"}
-                />{" "}
-                {/**/}
-              </div>
+  return (
+    <>
+      <div
+        id={"sub-header"}
+        className={styles.header}
+        style={{ display: headerDisplay }}
+      >
+        {
+          <section className={styles.banner}>
+            <div className={styles.colMedia}>
               <div className={styles.colText}>
+                <h1 className={styles.title}>{siteConfig.title}</h1>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
-                <h2>
-                  L'appli mobile tout-en-un dans le contrôle de ton ordi à carte
-                  unique
-                </h2>
-                <div className={styles.button}>
-                  <button onClick={this.scrollToMain}>Découvrir</button>
-                </div>
+                <p>
+                  {siteConfig.tagline}
+                </p>
+                {(counter === 0 || counter >= 100) ?
+                  <div className={styles.button}>
+                    <button onClick={scrollToMain}>Get Started</button>
+                  </div>
+                  : <div className={styles.button}>
+                    <p className={styles.progressBar}>{progressBar} <span>{counter}%</span></p>
+                  </div>
+                }
               </div>
-            </section>
-          }
-        </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.media}
+                /*{'https://cdn.dribbble.com/users/9543282/screenshots/16960929/media/b8756407a2bd598e539acc77edbff185.png'}*/
+                src={"/img/codde_pi_introduction_4_3.webp"}
+                title={
+                  "CODDE Pi's Robot is writing script, &lt;https://creativecommons.org/licenses/by-nc-nd/4.0/&gt; Creative Commons Mathis Lecomte"
+                }
+                alt={"coddepi's robot is writing python script"}
+                width={800}
+                height={600}
+              />{" "}
+              {/**/}
+            </div>
+          </section>
+        }
+      </div >
 
-        <div className={styles.pseudoHeader}>
-          <p style={{ color: "#121212" }}>
-            L&apos;appli mobile tout-en-un dans le contrôle de ton ordi à carte
-            unique
-          </p>
-        </div>
-        <div
-          className={styles.pixels}
-          style={{
-            opacity: this.state.pixelOpacity,
-            display: this.state.pixelDisplay,
-          }}
-        >
-          {
-            this.state.pixelArrays.map((item, index) => {
-              return (
-                <div key={"pixel_" + index + "_" + randomId()}>{item}</div>
-              );
-            })
-            /*pixelHtml.map((item, index) => {
-                            <div>
-                                {item.map((item, index) => {
-                                    item
-                                })}
-                            </div>
-                        })*/
-          }
-        </div>
-      </>
-    );
-  }
+      <div className={styles.pseudoHeader}>
+        <p style={{ color: "#121212" }}>
+          {siteConfig.tagline}
+        </p>
+      </div>
+      <div
+        className={styles.pixels}
+        style={{
+          opacity: pixelOpacity,
+          display: pixelDisplay,
+        }}
+      >
+        {
+          pixelArrays.map((item, index) => {
+            return (
+              <div key={"pixel_" + index + "_"}>{item.map((item2, index2) => {
+                return item2;
+              })
+              }</div>
+            );
+          })
+        }
+      </div>
+    </>
+  );
 }

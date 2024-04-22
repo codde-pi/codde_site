@@ -1,0 +1,26 @@
+@import "../../css/variables.module.scss";
+.storeLayout {
+  margin: auto;
+  padding: 2rem;
+ display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storeButton {
+  @include btn-style(
+    $color-text,
+    $color-surface,
+    darken($color-surface, 15),
+    $shadow
+  );
+  display: flex; align-items: center;
+
+  svg {
+    max-height: 3rem;
+  }
+
+  span {
+    margin-left: 1rem;
+  }
+}

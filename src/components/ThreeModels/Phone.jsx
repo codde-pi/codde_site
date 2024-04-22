@@ -27,7 +27,6 @@ export default function Phone({ screenImage, props }) {
   });
   const white = new MeshBasicMaterial({ color: '#ffffff' });
   // materials.Screen = screen;
-  console.log('nodes', nodes)
   nodes.LineArt.material = white;
   nodes.Cube_1.geometry = new PlaneGeometry(0.9, 2.0);
   // nodes.Cube_1.material = screen;

@@ -6,8 +6,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "C.O.D.D.E. Pi",
-  tagline: "Dinosaurs are cool",
+  title: "C.O.D.D.E. Pi®",
+  tagline: "The all-in-one app for your next DIY project",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -84,7 +84,7 @@ const config = {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
-            label: "Doc",
+            label: "Documentation",
           },
           {
             href: "https://github.com/codde-pi",
@@ -100,27 +100,27 @@ const config = {
           {
             title: "Docs",
             items: [
-              {
-                label: "Tutorial",
-                to: "/codde_doc/intro",
-              },
             ],
           },
           {
             title: "Community",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
-              },
-              {
                 label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
+                href: "https://discordapp.com/invite/VvQfNWZPw3",
               },
               {
                 label: "Twitter",
-                href: "https://twitter.com/docusaurus",
+                href: "https://twitter.com/codde_pi",
               },
+              {
+                label: "Mastodon",
+                href: "https://mastodon.social/@coddepi",
+              },
+              {
+                label: "Instagram",
+                href: "https://instagram.com/codde_pi/",
+              }
             ],
           },
           {
@@ -132,12 +132,12 @@ const config = {
               },
               {
                 label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
+                href: "https://github.com/codde-pi/",
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Mathis LECOMTE`,
       },
       prism: {
         theme: lightCodeTheme,

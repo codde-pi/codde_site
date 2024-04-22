@@ -46,6 +46,7 @@ export default function MultiComGraph() {
   return (
     <section className="wrapperL">
       <h2>Same Code. Different platforms.</h2>
+      <p>Bring to live our home-made communication protocol (<a href="https://github.com/codde-pi/codde_protocol" target="_blank">CODDE Protocol</a>), design to run on any devices and through any medium.</p>
       <div className={styles.graph} ref={graphRef}>
         <div
           className={styles.loading}
