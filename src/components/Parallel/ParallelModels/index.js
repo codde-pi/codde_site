@@ -1,4 +1,4 @@
-import { Children } from "react";
+import { Children, useEffect, useState } from "react";
 import ModelViewer from "../../ThreeModels/ModelViewer";
 import styles from "../styles.module.scss";
 
@@ -10,7 +10,16 @@ export default function ParallelModels({
   media_height,
   asymmetric,
   position,
+  title,
 }) {
+  const [mediaWidth, setMediaWidth] = useState(media_width);
+  const [mediaHeight, setMediaHeight] = useState(media_height);
+  useEffect(() => {
+    if (media_width > window.screen.width) {
+      setMediaWidth(window.screen.width);
+      setMediaHeight(window.screen.width);
+    }
+  }, [])
   return (
     <section className={side === "left" ? styles.left : styles.right}>
       <div
@@ -25,11 +34,16 @@ export default function ParallelModels({
       >
         <ModelViewer
           // src={src}
-          width={media_width ?? 1200}
-          height={media_height ?? 900}
+          title={title}
+          width={mediaWidth ?? 1200}
+          height={mediaHeight ?? 900}
           position={position}
         >{Children.toArray(children)[0]}</ModelViewer>
       </div>
-    </section>
+    </section >
   );
 }
+
+/* width={mediaWidth ?? 1200}
+height={mediaHeight ?? 900} */
+

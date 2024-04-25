@@ -6,10 +6,10 @@ import classNames from "classnames";
 
 export default function ParallelPhone() {
   const screenList = [
-    "/img/screenshot_1.png",
-    "/img/screenshot_2.png",
-    "/img/screenshot_3.png",
-    "/img/screenshot_4.png",
+    "/img/screen_projects.png",
+    "/img/screen_controller.png",
+    "/img/screen_device.png",
+    "/img/screen_diagram.png",
   ];
   const tabList = [
     "Projects management",
@@ -33,7 +33,7 @@ export default function ParallelPhone() {
 
   })
 
-  return (<ParallelModels side={'right'} media_height={600} media_width={600} position={[2, 0, 1]}>
+  return (<ParallelModels side={'right'} media_height={600} media_width={600} position={[2, 0, 1]} title={"Phone features"}>
     <Phone screenImage={screenList[selected]} />
     <div>
       <h2>Unleash the potential of your smartphone</h2>

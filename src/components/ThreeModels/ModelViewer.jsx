@@ -8,9 +8,11 @@ import Loader from "./Loader";
 import { EffectComposer } from "@react-three/postprocessing";
 import { Outline } from '@react-three/postprocessing'
 
-export default function ModelViewer({ children, src, width, height, position = [10, 10, 10] }) {
+export default function ModelViewer({ children, src, width, height, position = [10, 10, 10], title }) {
   return (
-    <Canvas style={{ width: width, height: height }} camera={{ position: position }}>
+    <Canvas style={{ width: width, height: height }} camera={{ position: position }} title={
+      title + ", &lt;https://creativecommons.org/licenses/by-nc-nd/4.0/&gt; Creative Commons Mathis Lecomte"
+    }>
       <ambientLight intensity={2} />
       {/* <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} /> */}
       {/* <pointLight position={[-10, -10, -10]} /> */}

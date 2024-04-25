@@ -78,8 +78,7 @@ const config = {
           src: "img/logo.svg",
         },
         items: [
-          { to: "/blog", label: "News", position: "left" },
-          { to: "/#download", label: "Download", position: "left" },
+          { to: "/#stores", label: "Download", position: "left" },
           {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
@@ -100,10 +99,14 @@ const config = {
           {
             title: "Docs",
             items: [
+              {
+                label: "CODDE Example",
+                to: "https://github.com/codde-pi/codde_example",
+              },
             ],
           },
           {
-            title: "Community",
+            title: "Social network",
             items: [
               {
                 label: "Discord",
@@ -126,14 +129,15 @@ const config = {
           {
             title: "More",
             items: [
-              {
-                label: "Blog",
-                to: "/blog",
-              },
+              /* {
+                label: "Contact us",
+                to: "/contact",
+              }, */
               {
                 label: "GitHub",
                 href: "https://github.com/codde-pi/",
               },
+              { label: "Community (soon)", href: "#", },
             ],
           },
         ],

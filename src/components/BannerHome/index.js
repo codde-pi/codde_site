@@ -9,7 +9,8 @@ let oldPosition = 0;
 
 
 function plusDemi(nb) {
-  let factor = screen.height > screen.width ? 1.4 : 1;
+  // let factor = screen.height > screen.width ? 1.4 : 1;
+  let factor = 1;
   //console.log('height', screen.height)
   return nb * factor;
 }
@@ -66,9 +67,9 @@ export default function BannerHome() {
   const { height, width } = useWindowDimensions();
   var _isMounted = false;
 
-  const [pixelDisplay, setPixelDisplay] = useState('block');
+  const [pixelDisplay, setPixelDisplay] = useState('none');
   const [pixelOpacity, setPixelOpacity] = useState(0);
-  const [headerDisplay, setHeaderDisplay] = useState('block');
+  const [headerDisplay, setHeaderDisplay] = useState('none');
   const [pixelArrays, setPixelArrays] = useState([]);
   const [counter, setCounter] = useState(0);
   const [progressBar, setProgressBar] = useState("");
@@ -161,7 +162,6 @@ export default function BannerHome() {
       }
     }
     setPixelArrays(array);
-    console.log('pixel udpated')
   };
   // Declare a static listener.
   const eventListeners = useRef();
@@ -209,7 +209,7 @@ export default function BannerHome() {
             nb_colored_rows = Math.ceil(
               current_pos / pixelSize
             );
-            console.log('nb colored rows => ', nb_colored_rows);
+            // console.log('nb colored rows => ', nb_colored_rows);
             //for each colored row
             // FIXME: doesn't update pixel arrays without this next line
             setProgressBar(getProgressBar(nb_colored_rows, nbRows));
@@ -242,13 +242,21 @@ export default function BannerHome() {
     const intervalID = setInterval(() => {
       if (pos <= plusDemiHeight) {
         pos = pos + 150;
-        _isMounted && window.scrollTo(0, pos);
+        window.scrollTo(0, pos);
         //console.log('pos', pos)
       } else {
         //console.log('progressive SCROLL clear interval')
         clearInterval(intervalID);
       }
     }, 50);
+    /* setTimeout(() => {
+
+      if (pos <= plusDemiHeight) {
+        pos = pos + 150;
+        _isMounted && scrollTo(0, pos);
+      }
+    }, 50); */
+    console.log("animated")
   };
 
   const isDesktop = () => {
@@ -256,11 +264,16 @@ export default function BannerHome() {
   };
 
   useEffect(() => {
-    _isMounted = true;
+    _isMounted = true; // TODO: unused
+    if (window.scrollY === 0) {
+      setHeaderDisplay('block');
+    } else {
+      setHeaderDisplay('none');
+    }
     //console.log('width & height => ', width, height);
 
     // declare table size
-    nbRows = Math.ceil(height / pixelSize);
+    nbRows = Math.ceil(window.screen.height / pixelSize);
     const nbColumns = Math.ceil(width / pixelSize);
     //console.log('rows & columns => ', nbRows, nbColumns);
 
@@ -286,15 +299,16 @@ export default function BannerHome() {
 
   useEffect(() => {
 
-    // document.addEventListener("scroll", scrollHandler);
-    window.removeEventListener('scroll', eventListeners.current, true);
-
     // Then will set our current scroll handler to our static listener
     eventListeners.current = scrollHandler;
 
     // Here will be adding the static listener so we can keep the reference
     // and remove it later on
     window.addEventListener('scroll', eventListeners.current, true);
+
+    return () => {
+      window.removeEventListener('scroll', eventListeners.current, true);
+    };
 
   }, [scrollHandler])
 
@@ -303,6 +317,7 @@ export default function BannerHome() {
     clearInterval(this.intervalID);
     document.removeEventListener("scroll", const scrollListener);
   } */
+
 
   return (
     <>
@@ -320,7 +335,7 @@ export default function BannerHome() {
                 <p>
                   {siteConfig.tagline}
                 </p>
-                {(counter === 0 || counter >= 100) ?
+                {(counter === 0 || counter >= 100 || window.scrollY === 0) ?
                   <div className={styles.button}>
                     <button onClick={scrollToMain}>Get Started</button>
                   </div>
@@ -330,18 +345,20 @@ export default function BannerHome() {
                 }
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className={styles.media}
-                /*{'https://cdn.dribbble.com/users/9543282/screenshots/16960929/media/b8756407a2bd598e539acc77edbff185.png'}*/
-                src={"/img/codde_pi_introduction_4_3.webp"}
-                title={
-                  "CODDE Pi's Robot is writing script, &lt;https://creativecommons.org/licenses/by-nc-nd/4.0/&gt; Creative Commons Mathis Lecomte"
-                }
-                alt={"coddepi's robot is writing python script"}
-                width={800}
-                height={600}
-              />{" "}
-              {/**/}
+              <div className={styles.mediaWrapper}>
+                <img
+                  className={styles.media}
+                  /*{'https://cdn.dribbble.com/users/9543282/screenshots/16960929/media/b8756407a2bd598e539acc77edbff185.png'}*/
+                  src={"/img/codde_pi_introduction_4_3.webp"}
+                  title={
+                    "CODDE Pi's Robot is writing script, &lt;https://creativecommons.org/licenses/by-nc-nd/4.0/&gt; Creative Commons Mathis Lecomte"
+                  }
+                  alt={"coddepi's robot is writing python script"}
+                  width={800}
+                // height={600}
+                />{" "}
+                {/**/}
+              </div>
             </div>
           </section>
         }

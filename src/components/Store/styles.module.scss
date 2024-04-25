@@ -8,12 +8,7 @@
 }
 
 .storeButton {
-  @include btn-style(
-    $color-text,
-    $color-surface,
-    darken($color-surface, 15),
-    $shadow
-  );
+  background-color: $color-surface;
   display: flex; align-items: center;
 
   svg {

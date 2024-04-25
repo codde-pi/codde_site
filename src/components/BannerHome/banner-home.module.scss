@@ -142,9 +142,6 @@
   .colMedia {
     flex: 2;
     h2,
-    .button {
-      display: none;
-    }
 
     .media {
       max-width: 400px !important;
@@ -173,7 +170,23 @@
   .colMedia {
     flex-direction: column-reverse;
     gap: 0;
+
+      .colText {
+    text-align: center;
   }
+
+  .mediaWrapper {
+    display: flex;
+    height: 50%;
+  }
+
+    .media {
+    margin: auto;
+    vertical-align: middle;
+    position: relative;
+    }
+  }
+
 }
 
 .gelatine {
