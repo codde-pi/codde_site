@@ -335,7 +335,7 @@ export default function BannerHome() {
                 <p>
                   {siteConfig.tagline}
                 </p>
-                {(counter === 0 || counter >= 100 || window.scrollY === 0) ?
+                {(counter === 0 || counter >= 100) ?
                   <div className={styles.button}>
                     <button onClick={scrollToMain}>Get Started</button>
                   </div>
