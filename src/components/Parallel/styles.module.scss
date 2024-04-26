@@ -1,0 +1,42 @@
+@import "../../css/variables.module.scss";
+
+/*region PARALLELCONTENT*/
+%parallelContent {
+  @extend %flex-container;
+  max-width: $wrapperL;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  align-items: center;
+  // margin-bottom: 1rem !important;
+
+}
+
+.left {
+  @extend %parallelContent;
+  flex-direction: row;
+}
+
+.right {
+  @extend %parallelContent;
+  flex-direction: row-reverse;
+}
+
+.colText {
+}
+
+.colMedia {
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+  .left {
+    flex-direction: column-reverse;
+  }
+  .right {
+    flex-direction: column-reverse;
+  }
+}
+
+/*endregion PARALLELCONTENT*/
+

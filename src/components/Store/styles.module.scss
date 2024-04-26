@@ -1,0 +1,21 @@
+@import "../../css/variables.module.scss";
+.storeLayout {
+  margin: auto;
+  padding: 2rem;
+ display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storeButton {
+  background-color: $color-surface;
+  display: flex; align-items: center;
+
+  svg {
+    max-height: 3rem;
+  }
+
+  span {
+    margin-left: 1rem;
+  }
+}

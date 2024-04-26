@@ -1,0 +1,14 @@
+@import "../../../css/variables.module.scss";
+.tabFeatures {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding-bottom: 1rem;
+
+  .disabled{
+background-color: $color-surface;
+    border-bottom-color: $link;
+    color: $color-text;
+  }
+
+}

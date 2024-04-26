@@ -1,0 +1,34 @@
+@import 'variables.module.scss';
+
+.invertImage {
+    filter: invert(1);
+}
+
+.noInversion {
+
+}
+
+.centerText {
+    text-align: center;
+}
+
+.cookieBanner {
+    background: $color-background;
+}
+
+.indent {
+    margin-left: 3rem;
+}
+
+.boxDefault {
+    padding: 1.25em;
+    margin: 1em;
+    border-radius: $radius;
+    background: $color-surface;
+
+}
+
+.textButton {
+    background: transparent;
+    color: $color-primary;
+}

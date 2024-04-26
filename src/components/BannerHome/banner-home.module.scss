@@ -1,0 +1,206 @@
+@import "../../css/variables.module.scss";
+//@import 'functions';
+
+.header {
+  height: 100vh;
+  width: 100%;
+  background: $color-background;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  //padding-top: 72px;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-width: $wrapperL;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 0;
+  min-height: 100vh;
+  margin: auto;
+
+  p {
+    font-size: 1.25em;
+    //font-family: $font-text;
+    // color: $color-text;
+    font-weight: normal;
+    margin-top: 0;
+  }
+
+  > div {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  > .colText {
+    display: none;
+  }
+}
+
+.pseudoHeader {
+  height: 120vh;
+  width: 100%;
+  //background-color: yellow;
+}
+
+.main {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: green;
+}
+
+.pixels {
+  height: 100vh;
+  width: 100%;
+  z-index: 5;
+  border-collapse: collapse;
+  border-width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+.pixels > div {
+  width: 100%;
+  height: 30px;
+  display: flex;
+}
+
+.pixels > div > div {
+  display: block;
+  width: 30px;
+  height: 100%;
+  border: none;
+}
+
+.color {
+  background: red;
+}
+
+.hide {
+  opacity: 0 !important;
+  /* transition: opacity 1s ease-in-out; */
+}
+
+/* Components */
+
+.title {
+  //text-align: center;
+}
+
+.button {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.parallel {
+  @extend %flex-container;
+  max-width: $wrapperL;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.colText {
+  flex: 2;
+}
+
+.colMedia {
+  flex: 3;
+}
+
+.colMedia {
+  display: flex;
+  width: 100%;
+  height: auto;
+  gap: 1rem;
+  justify-content: space-evenly;
+
+  > .colText {
+    align-self: center;
+  }
+}
+
+.media {
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+  .banner {
+    flex-direction: column;
+    gap: 0;
+  }
+  .colMedia {
+    flex: 2;
+    h2,
+
+    .media {
+      max-width: 400px !important;
+    }
+
+    .colText {
+      flex: 1;
+    }
+  }
+
+  .banner > .colText {
+    display: block;
+    padding-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+  .banner {
+    gap: 0;
+
+    > div {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  .colMedia {
+    flex-direction: column-reverse;
+    gap: 0;
+
+      .colText {
+    text-align: center;
+  }
+
+  .mediaWrapper {
+    display: flex;
+    height: 50%;
+  }
+
+    .media {
+    margin: auto;
+    vertical-align: middle;
+    position: relative;
+    }
+  }
+
+}
+
+.gelatine {
+  animation: gelatine 0.3s infinite; // not infinite
+}
+@keyframes gelatine {
+  from, to { transform: scale(1, 1); }
+  25% { transform: scale(0.9, 1.1); }
+  50% { transform: scale(1.1, 0.9); }
+  75% { transform: scale(0.95, 1.05); }
+}
+
+.progressBar {
+  span {
+  color: $color-primary;
+}
+}
