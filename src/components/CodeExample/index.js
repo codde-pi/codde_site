@@ -6,7 +6,7 @@ export default function CodeExample({ language }) {
   const [code, setCode] = useState("");
   useEffect(() => {
 
-    fetch('https://raw.githubusercontent.com/codde-pi/codde_example/main/jerry/main.py')
+    fetch('https://raw.githubusercontent.com/codde-pi/codde_example/main/zumo/main.py')
       .then(response => response.text())
       .then(text => setCode(text))
   }, [])

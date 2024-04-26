@@ -1,12 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 import styles from "./multi-com-graph.module.scss";
-// import SlidingList from "@site/src/components/SlidingList";
 import PhoneIcon from "@site/static/img/icon_phone.svg";
 import ComputerIcon from "@site/static/img/icon_computer.svg";
 import TabletIcon from "@site/static/img/icon_tablet.svg";
 import { useState, useEffect, useRef } from "react";
-import layouts from "@site/src/css/layouts.scss";
 import variables from "@site/src/css/variables.module.scss";
 
 export default function MultiComGraph() {

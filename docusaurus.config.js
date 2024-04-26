@@ -24,9 +24,6 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
@@ -41,40 +38,56 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           path: "codde_doc",
           routeBasePath: "codde_doc",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         theme: {
           customCss: [
             require.resolve("./src/css/custom.css"),
             require.resolve("./src/css/globals.scss"),
-            require.resolve("./src/css/layouts.scss"),
+            require.resolve("./src/css/layouts.module.scss"),
             require.resolve("./src/css/variables.module.scss"),
+            require.resolve("./src/css/utils.module.scss"),
           ],
         },
       }),
     ],
   ],
 
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://codde-pi.com',
+      },
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org/',
+        '@type': 'Organization',
+        name: 'Mathis LECOMTE',
+        url: 'https://codde-pi.com/',
+        logo: 'https://codde-pi.com/img/logo.svg',
+      }),
+    },
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { name: 'keywords', content: '"diy", "raspberrypi", "python", "rust", "blockchain", "3d", "three.js", "embedded", "iot"' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+      ],
       // Replace with your project's social card
-      image: "img/docusaurus-social-card.jpg",
+      image: "img/codde_pi_introduction_4_3.webp",
       navbar: {
         style: "dark",
-        title: "C.O.D.D.E. Pi",
+        title: "C.O.D.D.E. Pi®",
         logo: {
-          alt: "My Site Logo",
+          alt: "CODDE Pi Logo",
           src: "img/logo.svg",
         },
         items: [
@@ -85,6 +98,7 @@ const config = {
             position: "left",
             label: "Documentation",
           },
+          { label: "Join us", position: "right", href: "/#discord" },
           {
             href: "https://github.com/codde-pi",
             label: "GitHub",
@@ -123,6 +137,10 @@ const config = {
               {
                 label: "Instagram",
                 href: "https://instagram.com/codde_pi/",
+              },
+              {
+                label: "YouTube",
+                href: "https://www.youtube.com/channel/UCzA_kHTRtq1MDVjzJNoQOaA",
               }
             ],
           },
@@ -138,6 +156,8 @@ const config = {
                 href: "https://github.com/codde-pi/",
               },
               { label: "Community (soon)", href: "#", },
+              { label: "CGU", href: "/cgu" },
+              { label: "Privacy", href: "/privacy" }
             ],
           },
         ],

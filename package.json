@@ -1,14 +1,13 @@
 {
-  "name": "codde-site",
-  "version": "0.0.1",
+  "name": "codde_site",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
