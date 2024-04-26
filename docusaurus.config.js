@@ -20,6 +20,8 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "codde-pi", // Usually your GitHub org/user name.
   projectName: "codde_site", // Usually your repo name.
+  trailingSlash: false,
+  deploymentBranch: "main",
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
