@@ -16,7 +16,7 @@
   "dependencies": {
     "@docusaurus/core": "^3.1.1",
     "@docusaurus/preset-classic": "^3.1.1",
-    "@mdx-js/react": "^1.6.22",
+    "@mdx-js/react": "^3.0.1",
     "@react-three/drei": "^9.99.7",
     "@react-three/fiber": "^8.15.19",
     "@react-three/postprocessing": "^2.16.2",
@@ -58,10 +58,5 @@
   },
   "engines": {
     "node": ">=16.14"
-  },
-  "git": {
-    "scripts": {
-      "pre-push": "surge --project ./build --domain codde-pi.com"
-    }
   }
 }
