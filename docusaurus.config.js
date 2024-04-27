@@ -170,7 +170,16 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
-  plugins: ["docusaurus-plugin-sass"],
+  plugins: [
+    "docusaurus-plugin-sass",
+    [
+      'vercel-analytics',
+      {
+        debug: true,
+        mode: 'auto',
+      },
+    ],
+  ],
 };
 
 module.exports = config;
