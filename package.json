@@ -7,8 +7,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
@@ -41,7 +40,9 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.1.1",
     "@types/classnames": "^2.3.1",
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "git-scripts": "^0.6.4",
+    "surge": "^0.23.1"
   },
   "browserslist": {
     "production": [
@@ -57,5 +58,10 @@
   },
   "engines": {
     "node": ">=16.14"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "surge --project ./build --domain codde-pi.com"
+    }
   }
 }

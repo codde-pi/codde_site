@@ -3,6 +3,7 @@ import styles from "./banner-home.module.scss";
 // import $ from "jquery";
 import useWindowDimensions from "@site/src/hooks/WindowDimensions";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 let nbRows = 0;
 let oldPosition = 0;
@@ -335,7 +336,7 @@ export default function BannerHome() {
                 <p>
                   {siteConfig.tagline}
                 </p>
-                {(counter === 0 || counter >= 100) ?
+                {(counter === 0 || counter >= 100 || window.scrollY === 0) ?
                   <div className={styles.button}>
                     <button onClick={scrollToMain}>Get Started</button>
                   </div>

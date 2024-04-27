@@ -9,6 +9,7 @@ import ParallelPhone from "../components/Parallel/ParallelPhone";
 import CommunityNetwork from "../components/CommunityNetwork";
 import Store from "../components/Store";
 import CodeExample from "../components/CodeExample";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 
 export default function Home() {
@@ -17,7 +18,11 @@ export default function Home() {
   return (
     <Layout title="Home" description="home">
       <>
-        <BannerHome />
+        <BrowserOnly>
+          {() =>
+            <BannerHome />
+          }
+        </BrowserOnly>
         <main className={styles.main} style={{ marginTop: "120px" }}>
           <ParallelModels side={'left'} media_height={600} media_width={600} position={[10, 5, 5]}>
             <Jerry position={[0, 0, 0]} />
@@ -30,7 +35,11 @@ export default function Home() {
             </div>
           </ParallelModels>
           <ParallelPhone />
-          <MultiComGraph />
+          <BrowserOnly>
+            {() =>
+              <MultiComGraph />
+            }
+          </BrowserOnly>
           <CommunityNetwork />
           <Store />
           <CodeExample language={"python"} />

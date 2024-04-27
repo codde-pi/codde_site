@@ -51,7 +51,7 @@ export default function MultiComGraph() {
           style={{
             width:
               width -
-              parseFloat(getComputedStyle(document.documentElement).fontSize), // 1rem,
+              parseFloat(window.getComputedStyle(document.documentElement).fontSize), // 1rem,
           }}
         >
           <SquareLoading length={width} numParticles={3} />
