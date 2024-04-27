@@ -5,8 +5,6 @@ import Link from "@docusaurus/Link";
 
 export default function Privacy() {
 
-    // const [cookies, setCookie, removeCookie] = useCookies(["allow_cookies"]);
-
     return (
         <>
             <Layout title="CODDE Pi - Charte sur le respect de la vie privée" description="Charte sur le respect de la vie privée">

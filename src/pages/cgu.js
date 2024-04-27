@@ -4,8 +4,6 @@ import Layout from "@theme/Layout";
 
 export default function Privacy() {
 
-    // const [cookies, setCookie, removeCookie] = useCookies(["allow_cookies"]);
-
     return (<>
         <Layout title="Conditions d'utilisations" description="Conditions d'utilisations">
             <main className={layouts.wrapperM}>

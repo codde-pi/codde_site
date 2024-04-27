@@ -13,8 +13,6 @@ import BrowserOnly from "@docusaurus/BrowserOnly";
 
 
 export default function Home() {
-  // const [cookies, setCookie, removeCookie] = useCookies(['allow_cookies']);
-  // const BannerHome = dynamic(() => import('../components/banner-home'))
   return (
     <Layout title="Home" description="home">
       <>

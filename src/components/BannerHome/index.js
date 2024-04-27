@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./banner-home.module.scss";
-// import $ from "jquery";
 import useWindowDimensions from "@site/src/hooks/WindowDimensions";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 
 let nbRows = 0;
 let oldPosition = 0;
