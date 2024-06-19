@@ -1,0 +1,40 @@
+import PythonApi from './_button-api-python.jsx';
+import RustApi from './_button-api-rust.mdx';
+
+Joystick simulate a tilt knob in all directions, outputing an angle and a strength. 
+
+## Thumbnail
+
+![Joystick](./assets/joystick.png)
+
+
+## API
+
+| Trigger | Value |
+| --- | --- |
+| OnTapDown(`f32`, `f32`) | `Joystick {delta: f32, intensity: f32}` |
+| OnTapUp() | `Joystick {delta: 0.0, intensity: 0.0}` |
+
+### Example
+
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
+<Tabs>
+  <TabItem value="python" label="Python" default>
+    <PythonApi name="Joystick" id="1"/>
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+    <RustApi name="Joystick" id="1"/>
+  </TabItem>
+</Tabs>
+
+
+## Datasheet
+
+| Property | Value |
+| --- | --- |
+ | Size | 2x2 |
+ | Behavior | `user_trigger` |
+
+(*) : arbitrary unit representing a reasonable digit dimension on the screen

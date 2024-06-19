@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import styles from "./multi-com-graph.module.scss";
+import layouts from "@site/src/css/layouts.module.scss";
 import PhoneIcon from "@site/static/img/icon_phone.svg";
 import ComputerIcon from "@site/static/img/icon_computer.svg";
 import TabletIcon from "@site/static/img/icon_tablet.svg";
@@ -126,7 +127,7 @@ export function SlidingList({ titles, items, delay, blowId }) {
   }, [titles.length]);
   return (
     <div
-      className={classNames(styles.slidingList, toggleAnim ? styles.sonar : "")}
+      className={classNames(styles.slidingList, toggleAnim ? styles.sonar : "", layouts.alternateSection)}
       id={blowId ?? ""}
     >
       <div

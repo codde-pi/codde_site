@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import CodeBlock from '@theme/CodeBlock';
 
 export default function CodeExample({ language }) {
   const [code, setCode] = useState("");
@@ -13,7 +12,7 @@ export default function CodeExample({ language }) {
   return (
     <section>
       <h2>Finally, run Jerry...</h2>
-      <SyntaxHighlighter style={atomOneDark} language={language}>{code}</SyntaxHighlighter>
+      <CodeBlock language={language}>{code}</CodeBlock>
       <p>Find more demos on <a href="https://github.com/codde-pi/codde_example" target="_blank">CODDE Example</a> repo ;)</p>
     </section>
   );

@@ -43,18 +43,6 @@ const getPixelKey = (row, col) => {
   return col + (row * (col + row));
 }
 
-const getProgressBar = (counter, total) => {
-  let progressCount = Math.floor((counter / total) * 50)
-  let progress = [];
-  let rest = [];
-  for (let i = 0; i < progressCount; i++) {
-    progress.push("█");
-  }
-  for (let i = 0; i < (50 - progressCount); i++) {
-    rest.push("▒");
-  }
-  return <><span>{progress.join("")}</span>{rest.join("")}</>;
-}
 
 export default function BannerHome() {
   let ticking = false;
@@ -72,6 +60,7 @@ export default function BannerHome() {
   const [pixelArrays, setPixelArrays] = useState([]);
   const [counter, setCounter] = useState(0);
   const [progressBar, setProgressBar] = useState("");
+  const progressBarParentRef = useRef();
 
   const pixelSize = 30;
   const pixelHighlight = { background: "#e6b905" }; // color primary
@@ -84,6 +73,24 @@ export default function BannerHome() {
 
   // const [pixelHtml, setPixelHtml] = React.useState(Array());
   // const [pixelRefs, setPixelRefs] = React.useState(Array());
+  //
+  const getProgressBarWidth = () => {
+    const step = 20; // see: variables.module.scss
+    return Math.floor(progressBarParentRef.current.offsetWidth / 20);
+
+  }
+  const getProgressBar = (counter, total) => {
+    let progressCount = Math.floor((counter / total) * getProgressBarWidth())
+    let progress = [];
+    let rest = [];
+    for (let i = 0; i < progressCount; i++) {
+      progress.push("█");
+    }
+    for (let i = 0; i < (getProgressBarWidth() - progressCount); i++) {
+      rest.push("▒");
+    }
+    return <><span>{progress.join("")}</span>{rest.join("")}</>;
+  }
 
   const hidePixels = () => {
     const array = [];
@@ -328,7 +335,8 @@ export default function BannerHome() {
         {
           <section className={styles.banner}>
             <div className={styles.colMedia}>
-              <div className={styles.colText}>
+              <div className={styles.colText} ref={progressBarParentRef
+              }>
                 <h1 className={styles.title}>{siteConfig.title}</h1>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                 <p>

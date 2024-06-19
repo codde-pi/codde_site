@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
@@ -12,9 +13,10 @@ $color-signature: #8b0c03;
 $color-text: #e1e1e1;
 $color-text-secondary: #212121;
 
-$font-headline: "Share Tech Mono", monospace;
+$font-headline: "Share Tech";
 $font-text: "Roboto", sans-serif;
 $font-signature: "Kaushan Script", cursive;
+$font-code: "Share Tech Mono", monospace;
 
 $radius: 0.5rem;
 $card-transition: all 0.2s ease-in-out;

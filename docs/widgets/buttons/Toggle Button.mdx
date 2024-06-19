@@ -1,0 +1,41 @@
+
+import PythonApi from './_button-api-python.jsx'; 
+ import RustApi from "./_button-api-rust.mdx"; 
+
+The toggle button lock its state to `true`|`false` toggled by a simple click.
+
+
+## Thumbnail
+
+:::danger Thumbnail is coming
+:::
+
+
+## API
+
+| Trigger | Value |
+| --- | --- |
+| OnTapDown(`bool`) | `ToggleButton {value: bool}` |
+
+### Example
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="python" label="Python" default>
+    <PythonApi name="ToggleButton" id="1"/> 
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+     <RustApi name="ToggleButton" id="1"/> 
+  </TabItem>
+</Tabs>
+
+## Datasheet
+
+| Property | Value |
+| --- | --- |
+ | Size | 2x1 |
+ | Behavior | `user_trigger` |
+
+(*) : arbitrary unit representing a reasonable digit dimension on the screen

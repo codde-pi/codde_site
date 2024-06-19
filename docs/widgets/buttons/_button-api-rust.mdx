@@ -1,0 +1,17 @@
+import convertCamelToUnderscore from "@site/src/utils/doc_utils";
+import CodeBlock from '@theme/CodeBlock';
+
+export default function RustApi(props)  {
+return <CodeBlock language="rust">
+{`use codde_protocol::api::models::{
+    widget_registry::WidgetRegistry, 
+    widget_registry::Action;
+}
+
+fn ${convertCamelToUnderscore(props.name)}_${props.id}(data: WidgetRegistry::${props.name}) -> Result<()> {
+    println!("${props.name} 1 {}", data);
+}
+// ...
+server.register_action(1, "${props.name}", Action::RustFn(${convertCamelToUnderscore(props.name)}_1));`}
+</CodeBlock>
+}
