@@ -1,12 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/docs/",
-      "destination": "https://docs.codde-pi.com/"
-    },
-    {
       "source": "/docs/:match*",
       "destination": "https://docs.codde-pi.com/:match*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
