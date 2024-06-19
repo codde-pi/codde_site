@@ -98,8 +98,7 @@ const config = {
         items: [
           { to: "/#stores", label: "Download", position: "left" },
           {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
+            href: "https://docs.codde-pi.com",
             position: "left",
             label: "Documentation",
           },
