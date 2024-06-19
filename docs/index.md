@@ -10,7 +10,7 @@ In this place you'll understand all the workings of C.O.D.D.E. Pi, and unleash t
 
 ## Summary
 
-- **[App-to-Robot communication](./procotol/index.md):** Explain in details how any smartphone can interact with your robot thanks to CODDE Protocol 
+- **[App-to-Robot communication](./protocol/index.md):** Explain in details how any smartphone can interact with your robot thanks to CODDE Protocol 
 - **[Widgets](./widgets/index.md):** The exhaustive list of all the widgets available in the mobile app, and the content of the instructions they send to embedded code
 - **Demos:** See the framework in action through the demos we breakdown
 

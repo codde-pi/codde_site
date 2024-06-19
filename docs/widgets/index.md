@@ -1,6 +1,6 @@
 # Widgets
 
-Widgets are _semi-standalone_ **UI blocks** of C.O.D.D.E. Pi's virtual controllers. While a controller establish connection with hardware once thanks to [CODDE Protocol](../procotol/index.md), each widget handle data differently and is a (potential) trigger/receiver for incoming/outgoing data.
+Widgets are _semi-standalone_ **UI blocks** of C.O.D.D.E. Pi's virtual controllers. While a controller establish connection with hardware once thanks to [CODDE Protocol](../protocol/index.md), each widget handle data differently and is a (potential) trigger/receiver for incoming/outgoing data.
 
 ## Widget types
 
