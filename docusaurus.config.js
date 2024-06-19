@@ -10,7 +10,7 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://codde-pi.com",
+  url: "https://docs.codde-pi.com",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -38,7 +38,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           path: "docs",
-          routeBasePath: "docs",
+          routeBasePath: "/",
         },
         theme: {
           customCss: [
@@ -96,14 +96,14 @@ const config = {
           src: "img/logo.svg",
         },
         items: [
-          { to: "/#stores", label: "Download", position: "left" },
+          { to: "https://codde-pi.com/#stores", label: "Download", position: "left" },
           {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
             label: "Documentation",
           },
-          { label: "Join us", position: "right", href: "/#discord" },
+          { label: "Join us", position: "right", href: "https://codde-pi.com/#discord" },
           {
             href: "https://github.com/codde-pi",
             label: "GitHub",
@@ -161,8 +161,8 @@ const config = {
                 href: "https://github.com/codde-pi/",
               },
               { label: "Community (soon)", href: "#", },
-              { label: "CGU", href: "/cgu" },
-              { label: "Privacy", href: "/privacy" }
+              { label: "CGU", href: "https://codde-pi.com/cgu" },
+              { label: "Privacy", href: "https://codde-pi.com/privacy" }
             ],
           },
         ],

@@ -28,6 +28,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.3.0",
     "@types/mdx": "^2.0.13",
+    "@vercel/edge": "^1.1.1",
     "clsx": "^1.2.1",
     "docusaurus-plugin-sass": "^0.2.5",
     "gltfjsx": "^6.2.16",
